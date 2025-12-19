@@ -36,8 +36,103 @@ body {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(1.1); opacity: 0.8; }
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Store Section */
+.store-section {
+    padding-bottom: 4rem;
+}
+
+.store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.product-image-container {
+    width: 100%;
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-info {
+    text-align: center;
+    width: 100%;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    color: var(--accent-1);
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+}
+
+.buy-button {
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.buy-button:hover {
+    opacity: 0.9;
 }
 
 .container {
@@ -79,24 +174,30 @@ body {
 }
 
 .timer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping on very small screens, but aim for single line */
+    justify-content: center;
+    gap: 1rem;
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
 }
 
 .timer-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 2rem 1rem;
+    border-radius: 15px;
+    padding: 1.5rem 0.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(10px);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    flex: 1;
+    /* Distribute space evenly */
+    min-width: 100px;
+    /* Minimum width to prevent crushing */
 }
 
 .timer-card:hover {
@@ -106,7 +207,8 @@ body {
 }
 
 .time-value {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
+    /* Slightly smaller to fit 6 in a row */
     font-weight: 900;
     line-height: 1;
     margin-bottom: 0.5rem;
@@ -116,10 +218,28 @@ body {
 }
 
 .time-label {
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-secondary);
+}
+
+.total-days-container {
+    margin-top: 2rem;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.total-days-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-1);
+}
+
+.total-days-label {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-left: 0.5rem;
 }
 
 /* Comparison Section */
@@ -159,7 +279,8 @@ body {
 }
 
 .card-image-container {
-    height: 380px; /* Taller for poster feel */
+    height: 380px;
+    /* Taller for poster feel */
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -181,7 +302,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -221,7 +342,16 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .title { font-size: 2.5rem; }
-    .timer-grid { grid-template-columns: 1fr 1fr; }
-    .container { gap: 4rem; padding: 2rem 1rem; }
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .timer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .container {
+        gap: 4rem;
+        padding: 2rem 1rem;
+    }
 }

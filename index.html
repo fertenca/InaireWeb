@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="background-glow"></div>
-    
+
     <main class="container">
         <section class="hero">
             <h1 class="title">Desde la filmación del video de <span class="gradient-text">Inaire</span></h1>
             <p class="subtitle">28 de Octubre de 2018</p>
-            
+
             <div class="timer-grid">
                 <div class="timer-card">
                     <span id="years" class="time-value">0</span>
@@ -34,6 +36,18 @@
                     <span id="hours" class="time-value">0</span>
                     <span class="time-label">Horas</span>
                 </div>
+                <div class="timer-card">
+                    <span id="minutes" class="time-value">0</span>
+                    <span class="time-label">Minutos</span>
+                </div>
+                <div class="timer-card">
+                    <span id="seconds" class="time-value">0</span>
+                    <span class="time-label">Segundos</span>
+                </div>
+            </div>
+            <div class="total-days-container">
+                <span id="total-days" class="total-days-value">0</span>
+                <span class="total-days-label">días totales han pasado</span>
             </div>
         </section>
 
@@ -45,6 +59,16 @@
         </section>
     </main>
 
+    <section class="store-section" id="store">
+        <div class="container">
+            <h2 class="section-title">Tienda Oficial <span class="gradient-text">Inaire</span></h2>
+            <div class="store-grid" id="store-grid">
+                <!-- Products will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
     <script src="script.js"></script>
 </body>
+
 </html>

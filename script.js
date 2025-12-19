@@ -54,11 +54,23 @@ function updateTimer() {
     diff %= msInDay;
 
     const hours = Math.floor(diff / msInHour);
+    diff %= msInHour;
+
+    const minutes = Math.floor(diff / (1000 * 60));
+    diff %= (1000 * 60);
+
+    const seconds = Math.floor(diff / 1000);
+
+    // Calculate absolute total days (floored)
+    const absoluteTotalDays = Math.floor((now - INAIRE_DATE) / msInDay);
 
     document.getElementById('years').innerText = years;
     document.getElementById('months').innerText = months;
     document.getElementById('days').innerText = days;
     document.getElementById('hours').innerText = hours;
+    document.getElementById('minutes').innerText = minutes;
+    document.getElementById('seconds').innerText = seconds;
+    document.getElementById('total-days').innerText = absoluteTotalDays.toLocaleString();
 
     // Update Series calculations
     // We use the TOTAL milliseconds difference to be precise about "amount of time available"
@@ -105,7 +117,66 @@ function renderSeries(totalDays, totalHours) {
     });
 }
 
-// Update every minute (no need for second precision for this scale, but maybe for effect?)
-// For "Hours", minute updates are fine.
+// Update every second
 updateTimer();
-setInterval(updateTimer, 60000);
+setInterval(updateTimer, 1000); // Keep existing updateTimer call
+
+const storeData = [
+    {
+        name: 'Remera "Rodri y la película?" - Negra',
+        price: '$15.000',
+        image: 'tshirt_black.png'
+    },
+    {
+        name: 'Remera "Rodri y la película?" - Blanca',
+        price: '$15.000',
+        image: 'tshirt_white.png'
+    },
+    {
+        name: 'Remera "Rodri y la película?" - Gris',
+        price: '$15.000',
+        image: 'tshirt_grey.png'
+    },
+    {
+        name: 'Taza "Rodri y la película?" - Blanca',
+        price: '$8.000',
+        image: 'mug_white.png'
+    },
+    {
+        name: 'Taza "Rodri y la película?" - Negra',
+        price: '$8.000',
+        image: 'mug_black.png'
+    },
+    {
+        name: 'Taza "Rodri y la película?" - Roja',
+        price: '$8.000',
+        image: 'mug_red.png'
+    }
+];
+
+function renderStore() {
+    const grid = document.getElementById('store-grid');
+    if (!grid) return;
+
+    storeData.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <div class="product-image-container">
+                <img src="${product.image}" alt="${product.name}" class="product-image">
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-price">${product.price}</p>
+                <a href="pago.html" class="buy-button">Comprar</a>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+// Initialize Store
+document.addEventListener('DOMContentLoaded', () => {
+    updateTimer();
+    renderStore();
+});
